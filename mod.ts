@@ -1,1 +1,1 @@
-export { cookieSign, cookieVerify } from './index.ts'
+export { cookieSign, cookieVerify, createSignedCookie, verifySignedCookie } from './index.ts'

@@ -1,8 +1,14 @@
 # Squishy Cookies 🍪
 
+<div align="center">
+
 Easily sign and verify cookies.
 
-> Be Careful out there, there are alpha software with no guarantee
+<img src="https://user-images.githubusercontent.com/1373867/185759251-6b3a9237-8e79-468a-b0e3-e235927f0267.png" />
+
+> Be Careful out there, there are alpha software out there with no guarantee.
+
+</div>
 
 ## Usage
 

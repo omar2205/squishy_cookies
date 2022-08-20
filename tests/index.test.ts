@@ -39,7 +39,7 @@ Deno.test('Creating and verifying cookies', async (t) => {
     const header = new Headers()
     header.set('cookie', cookie)
     const check = await verifySignedCookie(header, 'id', 'super_secret')
-    assertEquals(check, true)
+    assertEquals(check, '1.GA7yYwRpQqUvy5YbaBCGljYgC-s2VCguiN6jhjPJDNo.')
   })
 
   await t.step('verify a cookie - false', async () => {

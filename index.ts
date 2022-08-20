@@ -81,14 +81,14 @@ const createSignedCookie = async (
  * ```
  */
 const verifySignedCookie = async (
-  cookie_header: Headers,
+  headers: Headers,
   cookie_name: string,
   secret: string
 ) => {
-  const cookie = getCookies(cookie_header)[cookie_name]
+  const cookie = getCookies(headers)[cookie_name]
 
-  if (cookie) {
-    return await cookieVerify(cookie, secret)
+  if (cookie && await cookieVerify(cookie, secret)) {
+    return cookie
   }
   return false
 }

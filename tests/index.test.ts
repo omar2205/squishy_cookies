@@ -6,15 +6,22 @@ import {
   verifySignedCookie,
 } from '../index.ts'
 
+// holds all cookie operations results
+const cookies_res = {
+  hello_super_secret: 'hello.gsSaKanhysk-CuNkIJhUWsHItAOcFZbrNNTa95qCfAE.',
+  id_1_super_secret: '1.GA7yYwRpQqUvy5YbaBCGljYgC-s2VCguiN6jhjPJDNo.',
+  id_1_extra_super_secret: 'id=1.GA7yYwRpQqUvy5YbaBCGljYgC-s2VCguiN6jhjPJDNo.; HttpOnly; Path=/',
+}
+
 Deno.test('cookie testing', async (t) => {
   await t.step('sign a cookie', async () => {
     const cookie = await cookieSign('hello', 'super_secret')
-    assertEquals(cookie, 'hello.gsSaKanhysk-CuNkIJhUWsHItAOcFZbrNNTa95qCfAE.')
+    assertEquals(cookie, cookies_res['hello_super_secret'])
   })
 
   await t.step('verify a cookie', async () => {
     const res = await cookieVerify(
-      'hello.gsSaKanhysk-CuNkIJhUWsHItAOcFZbrNNTa95qCfAE.',
+      cookies_res['hello_super_secret'],
       'super_secret'
     )
     assertEquals(res, true)
@@ -31,7 +38,7 @@ Deno.test('Creating and verifying cookies', async (t) => {
     }))
     assertEquals(
       cookie,
-      'id=1.GA7yYwRpQqUvy5YbaBCGljYgC-s2VCguiN6jhjPJDNo.; HttpOnly; Path=/'
+      cookies_res['id_1_extra_super_secret']
     )
   })
 
@@ -39,12 +46,17 @@ Deno.test('Creating and verifying cookies', async (t) => {
     const header = new Headers()
     header.set('cookie', cookie)
     const check = await verifySignedCookie(header, 'id', 'super_secret')
-    assertEquals(check, '1.GA7yYwRpQqUvy5YbaBCGljYgC-s2VCguiN6jhjPJDNo.')
+    assertEquals(check, cookies_res['id_1_super_secret'])
   })
 
   await t.step('verify a cookie - false', async () => {
     const header = new Headers()
-    header.set('cookie', 'id=1.GA7yYRpQqUvy5YbaBCGljYgC-s2VCguiN6jhjPJDNo.')
+
+    // messing with a cookie
+    let c = cookies_res['id_1_super_secret']
+    c = c.slice(0, 6) + c.slice(7)
+
+    header.set('cookie', c)
     const check = await verifySignedCookie(header, 'id', 'super_secret')
     assertEquals(check, false)
   })

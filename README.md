@@ -24,6 +24,16 @@ const cookie = await cookieSign('hello', 'super_secret')
 await cookieVerify('hello.gsSaKanhysk-CuNkIJhUWsHItAOcFZbrNNTa95qCfAE.', 'super_secret')
 // true
 
-const { headers } = await createSignedCookie('id', '1', 'super_secret', { httpOnly: true, path: '/' })
+
+
+const { headers, cookie } = await createSignedCookie(
+    'id', '1', 'super_secret',
+    { httpOnly: true, path: '/' }
+)
 return new Response(page, { headers })
+
+// or
+
+const headers = new Headers()
+headers.set('set-cookie', cookie)
 ```

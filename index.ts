@@ -77,7 +77,7 @@ const createSignedCookie = async (
  * ### usage:
  * ```ts
  * await verifySignedCookie(headers, 'id', 'super_secret')
- * // true
+ * // false or cookie value
  * ```
  */
 const verifySignedCookie = async (

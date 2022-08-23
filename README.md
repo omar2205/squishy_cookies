@@ -35,5 +35,5 @@ return new Response(page, { headers })
 // or
 
 const headers = new Headers()
-headers.set('set-cookie', cookie)
+headers.append('set-cookie', cookie)
 ```

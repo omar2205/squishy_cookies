@@ -37,6 +37,7 @@ return new Response(page, { headers })
 const headers = new Headers()
 headers.append('set-cookie', cookie)
 
+headers.append('cookie', cookie) // verifySignedCookie will search for 'cookie' header
 const userId = await verifySignedCookie(headers, 'id', 'super_secret')
 // userId is false if the verification failed or the cookie value
 ```

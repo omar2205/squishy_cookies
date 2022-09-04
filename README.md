@@ -14,20 +14,13 @@ Easily sign and verify cookies.
 
 ```ts
 import {
-  cookieSign, cookieVerify
   createSignedCookie, verifySignedCookie,
-} from 'mod.ts'
+} from 'https://deno.land/x/squishy_cookies/mod.ts'
 
-const cookie = await cookieSign('hello', 'super_secret')
-// hello.gsSaKanhysk-CuNkIJhUWsHItAOcFZbrNNTa95qCfAE.
-
-await cookieVerify('hello.gsSaKanhysk-CuNkIJhUWsHItAOcFZbrNNTa95qCfAE.', 'super_secret')
-// true
-
-
+const COOKIE_SECRET = Deno.env.get('COOKIE_SECRET') || 'super_secret'
 
 const { headers, cookie } = await createSignedCookie(
-    'id', '1', 'super_secret',
+    'id', '1', COOKIE_SECRET,
     { httpOnly: true, path: '/' }
 )
 return new Response(page, { headers })
@@ -41,6 +34,26 @@ headers.append('set-cookie', cookie)
 // Verifying a cookie
 
 headers.append('cookie', cookie) // verifySignedCookie will search for 'cookie' header
-const userId = await verifySignedCookie(headers, 'id', 'super_secret')
+const userId = await verifySignedCookie(headers, 'id', COOKIE_SECRET)
 // userId is false if the verification failed or the cookie value
+if (userId) {
+  const user = await getUserById(userId.split('.')[0])
+}
+
+```
+
+
+### Tip to add multiple cookies
+```ts
+const { cookie: cookie1 } = await createSignedCookie(/* ... */)
+const { cookie: cookie2 } = await createSignedCookie(/* ... */)
+
+const response = new Response(someHTML, {
+  // using headers as an array of arrays let you use
+  // multiple headers with the same name
+  headers: [
+    ['Set-cookie', cookie1],
+    ['Set-cookie', cookie2],
+  ]
+})
 ```

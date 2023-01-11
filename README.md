@@ -6,8 +6,6 @@ Easily sign and verify cookies.
 
 <img src="https://user-images.githubusercontent.com/1373867/185759251-6b3a9237-8e79-468a-b0e3-e235927f0267.png" />
 
-> Be Careful out there, there are alpha software out there with no guarantee.
-
 </div>
 
 ## Usage
@@ -19,6 +17,9 @@ import {
 
 const COOKIE_SECRET = Deno.env.get('COOKIE_SECRET') || 'super_secret'
 
+// 1. Create a signed cookie
+
+// Optional, headers or cookie string (to be used in Set-cookie header)
 const { headers, cookie } = await createSignedCookie(
     'id', '1', COOKIE_SECRET,
     { httpOnly: true, path: '/' }
@@ -31,7 +32,7 @@ const headers = new Headers()
 headers.append('set-cookie', cookie)
 
 
-// Verifying a cookie
+// 2. Verifying a cookie
 
 headers.append('cookie', cookie) // verifySignedCookie will search for 'cookie' header
 const userId = await verifySignedCookie(headers, 'id', COOKIE_SECRET)

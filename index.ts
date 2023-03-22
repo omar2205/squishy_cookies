@@ -31,9 +31,15 @@ const cookieVerify = async (input: string, secret: string) => {
   // get the signature and raw data
   try {
     const inputArr = input.split('.')
-    if (inputArr.length !== 3) throw Error('Bad input')
+    let data, signature = ''
 
-    const [data, signature] = inputArr
+    // if we have more '.'
+    if (inputArr.length !== 3) {
+      data = inputArr.slice(0, -2).join('.')
+      signature = inputArr.at(-2)!
+    } else {
+      [data, signature] = inputArr
+    }
 
     return await verify(key, signature, data)
   } catch (_err) {

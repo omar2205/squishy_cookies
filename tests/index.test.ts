@@ -1,4 +1,4 @@
-import { assertEquals } from 'https://deno.land/std@0.152.0/testing/asserts.ts'
+import { assertEquals } from '../deps.ts'
 import {
   cookieSign,
   cookieVerify,
@@ -8,9 +8,9 @@ import {
 
 // holds all cookie operations results
 const cookies_res = {
-  hello_super_secret: 'hello.gsSaKanhysk-CuNkIJhUWsHItAOcFZbrNNTa95qCfAE.',
-  id_1_super_secret: '1.GA7yYwRpQqUvy5YbaBCGljYgC-s2VCguiN6jhjPJDNo.',
-  id_1_extra_super_secret: 'id=1.GA7yYwRpQqUvy5YbaBCGljYgC-s2VCguiN6jhjPJDNo.; HttpOnly; Path=/',
+  hello_super_secret: await cookieSign('hello', 'super_secret'),
+  id_1_super_secret: await cookieSign('1', 'super_secret'),
+  id_1_extra_super_secret: `id=${await cookieSign('1', 'super_secret')}; HttpOnly; Path=/`,
 }
 
 Deno.test('cookie testing', async (t) => {

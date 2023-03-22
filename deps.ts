@@ -1,15 +1,17 @@
 export {
-  encode as b64Encode,
   decode as b64Decode,
-} from 'https://deno.land/std@0.152.0/encoding/base64.ts'
+  encode as b64Encode,
+} from 'https://deno.land/std@0.181.0/encoding/base64.ts'
 
 export {
-  encode as safeEncode,
   decode as safeDecode,
-} from 'https://esm.sh/url-safe-base64@1.2.0'
+  encode as safeEncode,
+} from 'https://esm.sh/url-safe-base64@1.3.0'
 
 export {
+  type Cookie,
   getCookies,
   setCookie,
-  type Cookie,
-} from 'https://deno.land/std@0.150.0/http/cookie.ts'
+} from 'https://deno.land/std@0.181.0/http/cookie.ts'
+
+export { assertEquals } from 'https://deno.land/std@0.181.0/testing/asserts.ts'

@@ -1,4 +1,4 @@
-import { type Cookie, setCookie, getCookies } from './deps.ts'
+import { type Cookie, getCookies, setCookie } from './deps.ts'
 import { createKey, sign, verify } from './utils.ts'
 
 /**
@@ -31,15 +31,11 @@ const cookieVerify = async (input: string, secret: string) => {
   // get the signature and raw data
   try {
     const inputArr = input.split('.')
-    let data, signature = ''
 
-    // if we have more '.'
-    if (inputArr.length !== 3) {
-      data = inputArr.slice(0, -2).join('.')
-      signature = inputArr.at(-2)!
-    } else {
-      [data, signature] = inputArr
-    }
+    const data = inputArr.slice(0, -1).join('.')
+    const signature = inputArr.at(-1)
+
+    if (!signature) throw Error('Invalid input: Bad data')
 
     return await verify(key, signature, data)
   } catch (_err) {
@@ -62,7 +58,7 @@ const createSignedCookie = async (
   cookie_name: string,
   cookie_value: string,
   secret: string,
-  opts: CookieOptions
+  opts: CookieOptions = { path: '/' }
 ) => {
   const value = await cookieSign(cookie_value, secret)
 
@@ -93,7 +89,7 @@ const verifySignedCookie = async (
 ) => {
   const cookie = getCookies(headers)[cookie_name]
 
-  if (cookie && await cookieVerify(cookie, secret)) {
+  if (cookie && (await cookieVerify(cookie, secret))) {
     return cookie
   }
   return false

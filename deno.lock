@@ -1,0 +1,16 @@
+{
+  "version": "2",
+  "remote": {
+    "https://deno.land/std@0.181.0/_util/asserts.ts": "178dfc49a464aee693a7e285567b3d0b555dc805ff490505a8aae34f9cfb1462",
+    "https://deno.land/std@0.181.0/datetime/to_imf.ts": "8f9c0af8b167031ffe2e03da01a12a3b0672cc7562f89c61942a0ab0129771b2",
+    "https://deno.land/std@0.181.0/encoding/base64.ts": "144ae6234c1fbe5b68666c711dc15b1e9ee2aef6d42b3b4345bf9a6c91d70d0d",
+    "https://deno.land/std@0.181.0/fmt/colors.ts": "d67e3cd9f472535241a8e410d33423980bec45047e343577554d3356e1f0ef4e",
+    "https://deno.land/std@0.181.0/http/cookie.ts": "934f92d871d50852dbd7a836d721df5a9527b14381db16001b40991d30174ee4",
+    "https://deno.land/std@0.181.0/testing/_diff.ts": "1a3c044aedf77647d6cac86b798c6417603361b66b54c53331b312caeb447aea",
+    "https://deno.land/std@0.181.0/testing/_format.ts": "a69126e8a469009adf4cf2a50af889aca364c349797e63174884a52ff75cf4c7",
+    "https://deno.land/std@0.181.0/testing/asserts.ts": "e16d98b4d73ffc4ed498d717307a12500ae4f2cbe668f1a215632d19fcffc22f",
+    "https://esm.sh/url-safe-base64@1.3.0": "743f91c6d88e33ff8583bf3b7a5d66465989ae716e004a845ec3234c258b3809",
+    "https://esm.sh/v112/url-safe-base64@1.3.0/deno/url-safe-base64.mjs": "9c5977d6c7292e9fa85cdd850e6a70af4687e82ed877ad6b3728a1c959fc80c5",
+    "https://esm.sh/v112/url-safe-base64@1.3.0/types/index.d.ts": "8894b06c4bd98ee5a3f83a4d1b0e012b3c9efb11c13ae5f74c77de3f9212ef35"
+  }
+}
